@@ -1,11 +1,21 @@
 
-<script>
 	var command = {
+
     indexes: ["Hello"],
     action: function(){
-        document.write("Rocheandley is the best ping pong player");
+        artyom.say("hello back");
     }
 };
 
 artyom.addCommands(command);
-</script>
+
+
+	var weather = {
+
+    indexes: ["weather"],
+    action: function(){
+        artyom.say(weer);
+    }
+};
+
+artyom.addCommands(weather);

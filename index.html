@@ -2,11 +2,35 @@
 <html>
 <head>
 	<title>Project sam</title>
+	<script
+   src="https://code.jquery.com/jquery-3.1.1.min.js"
+   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <script src="weather.js"></script>
 	<script src="sam.js"></script>
 	<script src="commands.js"=></script>
+	
 </head>
 <body>
 <script>
+	$(document).ready(function() {
+  $.simpleWeather({
+    location: 'Groningen, groningen',
+    woeid: '',
+    unit: 'c',
+    success: function(weather) {
+    	if (weather.temp<15) {
+    		weer ="dam its "+ weather.temp +"degrees outside";
+    	} else {
+
+    		weer ="jesus  its "+ weather.temp +"degrees outside";
+    	}
+    },
+    error: function(error) {
+    }
+  });
+});
+
 artyom.initialize({
     lang:"en-GB",
     continuous:true,
@@ -18,19 +42,10 @@ artyom.initialize({
     artyom.say("Sorry roshentli , sam couldn't be initialized, please check the console for errors");
     console.log(err);
 });
+
 </script>
 
-
-<script>
-	var command = {
-    indexes: ["Hello"],
-    action: function(){
-        document.write("Rocheandley is the best ping pong player");
-    }
-};
-
-artyom.addCommands(command);
-</script>
+<img src="img/ironman.gif" alt="">
 
 </body>
 </html>
