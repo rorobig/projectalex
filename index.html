@@ -1,0 +1,35 @@
+<!DOCTYPE >
+<html>
+<head>
+	<title>Project sam</title>
+	<script src="sam.js"></script>
+</head>
+<body>
+<script>
+artyom.initialize({
+    lang:"en-GB",
+    continuous:true,
+    debug:true,
+    listen:true
+}).then(() => {
+    artyom.say("Welcome back roshentli");
+}).catch((err) => {
+    artyom.say("Sorry roshentli , sam couldn't be initialized, please check the console for errors");
+    console.log(err);
+});
+</script>
+
+
+<script>
+	var command = {
+    indexes: ["Hello"],
+    action: function(){
+        document.write("Rocheandley is the best ping pong player");
+    }
+};
+
+artyom.addCommands(command);
+</script>
+
+</body>
+</html>
