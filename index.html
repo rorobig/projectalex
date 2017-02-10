@@ -6,9 +6,13 @@
    src="https://code.jquery.com/jquery-3.1.1.min.js"
    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/JDMcKinstry/JavaScriptDateFormat/master/Date.format.min.js" ></script>
+    <script src="time.js"></script>
     <script src="weather.js"></script>
 	<script src="sam.js"></script>
 	<script src="commands.js"=></script>
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <script>
@@ -36,7 +40,7 @@ artyom.initialize({
     debug:true,
     listen:true
 }).then(() => {
- //   artyom.say("Welcome back roshentli");
+  //artyom.say("Welcome back roshentli ");
 }).catch((err) => {
     artyom.say("Sorry roshentli , sam couldn't be initialized, please check the console for errors");
     console.log(err);
@@ -44,6 +48,11 @@ artyom.initialize({
 
 </script>
 
+<h1></h1>
+<img align="middle" style="padding-top: 20px; padding-left: 10%;border-radius: 15px 50px;" src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-45488.jpg" height="550" alt="">
+
+
+<!-- <h1 style="text-align:center">Project ALex</h1> -->
 
 </body>
 </html>
