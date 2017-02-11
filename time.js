@@ -21,4 +21,3 @@ var objToday = new Date(),
 
 
 var today = curHour + ":" + curMinute + curMeridiem ;
- // "." + curSeconds + curMeridiem + " " + dayOfWeek + " " + dayOfMonth + " of " + curMonth + ", " + curYear;
