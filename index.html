@@ -2,15 +2,19 @@
 <html>
 <head>
 	<title>Project alex</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script
    src="https://code.jquery.com/jquery-3.1.1.min.js"
    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"></script>
     <script src="https://cdn.rawgit.com/JDMcKinstry/JavaScriptDateFormat/master/Date.format.min.js" ></script>
     <script src="time.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="weather.js"></script>
-	<script src="sam.js"></script>
-	<script src="commands.js"=></script>
+	  <script src="sam.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	  <script src="commands.js"=></script>
+    <script src="jquery.translate.js"/></script>
 	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -42,15 +46,109 @@ artyom.initialize({
 }).then(() => {
   //artyom.say("Welcome back roshentli ");
 }).catch((err) => {
-    artyom.say("Sorry roshentli , sam couldn't be initialized, please check the console for errors");
+    //artyom.say("Sorry roshentli , sam couldn't be initialized, please check the console for errors");
     console.log(err);
 });
+
+
+
+
+      // documentation
+      // https://developers.google.com/youtube/iframe_api_reference
+
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '290',
+          width: '590',
+          // videoId: 'M7lc1UVf-VE',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        // cue a playlist.
+        player.cuePlaylist({list: 'PLLdPJGHquctFFaYNmcSIZVjpHxjO9dZTS'});
+        player.playVideo();
+
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      // only load the playlist stuff once. 
+      var once = true;
+      function onPlayerStateChange(event) {
+        
+        if (event.data === YT.PlayerState.CUED && once) {
+            // load in the new playlist after the first cue event occurs. 
+            once = false;
+            // get the video id's from the playlist.
+            var playlist = player.getPlaylist();
+            var newPlaylist = [];
+            for (var i = 0; i < playlist.length; i++) {
+                newPlaylist.push(playlist[i]);
+            }
+            // create the new playlist with additional video id's.
+            newPlaylist.push('M7lc1UVf-VE');
+            player.loadPlaylist({playlist: newPlaylist});
+        }
+
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+         // setTimeout(stopVideo, 0000);
+          //  player.stopVideo();
+
+          done = false;
+        }
+      }
+
+      function stopVideo() {
+        player.stopVideo();
+      }
+
+
+
+  artyom.redirectRecognizedTextOutput((recognized,isFinal) => {
+    if(isFinal){
+        // Nothing
+      //  $("#span-preview").text("");
+    }else{
+        var rec = document.getElementById('span-preview');
+        rec.innerHTML +=  recognized +'<br>';
+       // $("#span-preview").text(value +recognized);
+    }
+});
+
+   // function recognized(text) {
+   //      var rec = document.getElementById('conversation');
+   //      rec.innerHTML += '<div class="recognized"><div>' + text + '</div></div>';
+   //  }
 
 </script>
 
 <h1 style="text-align:center">Project ALex</h1>
-<img align="middle" style="padding-top: 20px; padding-left: 10%;border-radius: 15px 50px;" src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-45488.jpg" height="550" alt="">
+<!-- <img align="middle" style="margin-bot: -50px; padding-left: 25%;border-radius: 15px 50px;" src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-45488.jpg" height="350" alt=""> -->
+<div style="margin-left: 300px;" class="" id="player"></div>
 
+ <div style="padding-left: 335px;" class="form-group">
+ <br>
+   <!-- / <label for="exampleTextarea">Recognized commands</label> -->
+    <textarea style="width:50%; " id="span-preview"  class="form-control disabled " placeholder="Sys logs"  name="message" rows="4"></textarea>
+  </div>
 
 
 </body>
