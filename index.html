@@ -126,9 +126,6 @@
         player.stopVideo();
       }
 
-
-
-
   artyom.redirectRecognizedTextOutput((recognized,isFinal) => {
     if(isFinal){
         // Nothing
@@ -139,7 +136,6 @@
        // $("#span-preview").text(value +recognized);
     }
 });
-
 
 </script>
 <h1 style="text-align:center">Project ALex</h1>
@@ -152,7 +148,6 @@
     <textarea style="width:50%; " id="span-preview"  class="form-control disabled " placeholder="Sys logs"  name="message" rows="2"></textarea>
   </div>
 <ul id="rss">
-  
 
 </ul>
   <script>
@@ -178,12 +173,41 @@
 
     });
 
-
   </script>
 
+<hr>
 
+<div style="margin-left:50%;" class="weekly-news">
+    <div class="title_bar">Energy Group guidelines
+        <div class="max_min_button">-</div>
+    </div>
+    <div class="news_body">Hi welcome!</div>
 </div>
+</div>
+<script>
+  $(".max_min_button").click(function () {
+    if ($(this).html() == "-") {
+        $(this).html("+");
+    } else {
+        $(this).html("-");
+    }
+    var thisParent = $(this).parent();
+    $(thisParent).next(".news_body").slideToggle();
+});
+
+
+  var commands = artyom.getAvailableCommands();
+
+for(var i = 0;i < commands.length;i++){
+    var command = commands[i];
+
+  }
 
 </script>
+
+
+
+
+
 </body>
 </html>
