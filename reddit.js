@@ -1,8 +1,9 @@
-var news = [];
-
-news[0]= "bomb in new york";
-news[1]= "bomb in miami";
-news[2] = "fuck muslims";
-for (var i = news.length - 1; i >= 0; i++) {
-	console.log(news[i]);
-}
+var posts= [];
+		$.get( "http://www.reddit.com/r/leagueoflegends.json?limit=5", function( data ) {
+		 	data = data.data.children;
+		 	$(data).each(function(post){
+		 	//	console.log(data[post].data.title);
+		 		posts.push(data[post].data.title);
+		 	//	console.log(posts.length)
+		 	});
+		});

@@ -14,7 +14,7 @@
 	  <script src="sam.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	  <script src="commands.js"=></script>
-    <script src="jquery.translate.js"/></script>
+    <script src="reddit.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -38,19 +38,19 @@
   });
 });
 
-artyom.initialize({
-    lang:"en-GB",
-    continuous:true,
-    debug:true,
-    listen:true
-}).then(() => {
-  //artyom.say("Welcome back roshentli ");
-}).catch((err) => {
-    //artyom.say("Sorry roshentli , sam couldn't be initialized, please check the console for errors");
-    console.log(err);
-});
+// artyom.initialize({
+//     lang:"en-GB",
+//     continuous:true,
+//     debug:true,
+//     listen:true
+// }).then(() => {
+//   //artyom.say("Welcome back roshentli ");
+// }).catch((err) => {
+//     //artyom.say("Sorry roshentli , sam couldn't be initialized, please check the console for errors");
+//     console.log(err);
+// });
 
-
+  
 
 
       // documentation
@@ -58,7 +58,7 @@ artyom.initialize({
 
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
-
+      var stop =true;
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -78,11 +78,13 @@ artyom.initialize({
         });
       }
 
+
       // 4. The API will call this function when the video player is ready.
       function onPlayerReady(event) {
         // cue a playlist.
         player.cuePlaylist({list: 'PLLdPJGHquctFFaYNmcSIZVjpHxjO9dZTS'});
         player.playVideo();
+
 
       }
 
@@ -111,6 +113,10 @@ artyom.initialize({
         if (event.data == YT.PlayerState.PLAYING && !done) {
          // setTimeout(stopVideo, 0000);
           //  player.stopVideo();
+           if (stop == true) {
+            player.stopVideo();
+            stop=false;
+        }  
 
           done = false;
         }
@@ -122,24 +128,20 @@ artyom.initialize({
 
 
 
+
   artyom.redirectRecognizedTextOutput((recognized,isFinal) => {
     if(isFinal){
         // Nothing
       //  $("#span-preview").text("");
     }else{
         var rec = document.getElementById('span-preview');
-        rec.innerHTML +=  recognized +'<br>';
+        rec.innerHTML = "~"+ recognized ;
        // $("#span-preview").text(value +recognized);
     }
 });
 
-   // function recognized(text) {
-   //      var rec = document.getElementById('conversation');
-   //      rec.innerHTML += '<div class="recognized"><div>' + text + '</div></div>';
-   //  }
 
 </script>
-
 <h1 style="text-align:center">Project ALex</h1>
 <!-- <img align="middle" style="margin-bot: -50px; padding-left: 25%;border-radius: 15px 50px;" src="https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-45488.jpg" height="350" alt=""> -->
 <div style="margin-left: 300px;" class="" id="player"></div>
@@ -147,9 +149,41 @@ artyom.initialize({
  <div style="padding-left: 335px;" class="form-group">
  <br>
    <!-- / <label for="exampleTextarea">Recognized commands</label> -->
-    <textarea style="width:50%; " id="span-preview"  class="form-control disabled " placeholder="Sys logs"  name="message" rows="4"></textarea>
+    <textarea style="width:50%; " id="span-preview"  class="form-control disabled " placeholder="Sys logs"  name="message" rows="2"></textarea>
   </div>
+<ul id="rss">
+  
+
+</ul>
+  <script>
+    var html = "";
+    $.get( "http://www.reddit.com/r/leagueoflegends.json?limit=5", function( data ) {
+      data = data.data.children;
+      $(data).each(function(post){
+        if (data[post].data.stickied === false) {
+          html+= "<li>"+ (data[post].data.title)+"</li>";
+        }
+        });
+      document.getElementById("rss").innerHTML = html;
+    });
+     
+     $.get( "https://www.reddit.com/r/webdev.json?limit=5", function( data ) {
+      data = data.data.children;
+      $(data).each(function(post){
+      if(data[post].data.stickied === false){
+        html+= "<li>"+ (data[post].data.title)+"</li>";
+      }
+      });
+      document.getElementById("rss").innerHTML = html;
+
+    });
 
 
+  </script>
+
+
+</div>
+
+</script>
 </body>
 </html>
