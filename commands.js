@@ -1,9 +1,14 @@
 // hello command
 	var command = {
-
     indexes: ["Hey alex"],
     action: function(){
+        var greetings= [];
         artyom.say("yo homie");
+        // ring a ding ding you are talking to the king
+        // This call may be recorded for training purposes
+        // What’s crackin’?
+        // What's cookin' good lookin'?
+        // hello good sir
     }
 };
 

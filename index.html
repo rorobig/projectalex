@@ -152,16 +152,7 @@
 </ul>
   <script>
     var html = "";
-    $.get( "http://www.reddit.com/r/leagueoflegends.json?limit=5", function( data ) {
-      data = data.data.children;
-      $(data).each(function(post){
-        if (data[post].data.stickied === false) {
-          html+= "<li>"+ (data[post].data.title)+"</li>";
-        }
-        });
-      document.getElementById("rss").innerHTML = html;
-    });
-     
+   html+="<h5>webdev</h5>"
      $.get( "https://www.reddit.com/r/webdev.json?limit=5", function( data ) {
       data = data.data.children;
       $(data).each(function(post){
@@ -172,16 +163,25 @@
       document.getElementById("rss").innerHTML = html;
 
     });
-
+    $.get( "http://www.reddit.com/r/leagueoflegends.json?limit=5", function( data ) {
+      data = data.data.children;
+        html+="<h5>leagueoflegends</h5>"
+      $(data).each(function(post){
+        if (data[post].data.stickied === false) {
+          html+= "<li>"+ (data[post].data.title)+"</li>";
+        }
+        });
+      document.getElementById("rss").innerHTML = html;
+    });
+ 
   </script>
-
 <hr>
 
-<div style="margin-left:50%;" class="weekly-news">
-    <div class="title_bar">Energy Group guidelines
+<div style="margin-left:76%;" class="weekly-news">
+    <div class="title_bar">Available commands
         <div class="max_min_button">-</div>
     </div>
-    <div class="news_body">Hi welcome!</div>
+    <ol id="commands" class="news_body">Hi welcome!</ol>
 </div>
 </div>
 <script>
@@ -195,19 +195,14 @@
     $(thisParent).next(".news_body").slideToggle();
 });
 
-
-  var commands = artyom.getAvailableCommands();
-
+var displaycommands = "";
+var commands = artyom.getAvailableCommands();
 for(var i = 0;i < commands.length;i++){
-    var command = commands[i];
+   // var command = commands[i];
+    displaycommands+= "<li>"+ JSON.stringify(commands[i]) + "</li>";
 
   }
-
+document.getElementById("commands").innerHTML=displaycommands;
 </script>
-
-
-
-
-
 </body>
 </html>
