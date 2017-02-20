@@ -2,13 +2,14 @@
 	var command = {
     indexes: ["Hey alex"],
     action: function(){
-        var greetings= [];
-        artyom.say("yo homie");
-        // ring a ding ding you are talking to the king
-        // This call may be recorded for training purposes
-        // What’s crackin’?
-        // What's cookin' good lookin'?
-        // hello good sir
+         var greetings= [];
+        greetings.push("hey");
+        greetings.push("ring a ding ding you are talking to the king");
+        greetings.push("This call may be recorded for training purposes");
+        greetings.push("What's cracking good looking?");
+        greetings.push("Whats cooking good looking?");
+        greetings.push("hello good sir");
+        artyom.say((greetings[ Math.floor((Math.random() * 6))]));
     }
 };
 
