@@ -17,7 +17,7 @@ artyom.addCommands(command);
 
 // weahter command
 	var weather = {
-
+    description: "says the weather",
     indexes: ["weather"],
     action: function(){
         artyom.say(weer);
@@ -104,4 +104,23 @@ var time = {
     }
 };
 artyom.addCommands(time);
+
+var news = {
+    indexes: ["news"],
+    action:function(){
+     $.get( "https://www.reddit.com/r/webdev.json?limit=5", function( data ) {
+      data = data.data.children;
+      $(data).each(function(post){
+      if(data[post].data.stickied === false){
+      }
+      });
+    });
+        artyom.say("whats up doc");
+
+    }
+};
+
+artyom.addCommads(news);
+
+
 
